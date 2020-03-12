@@ -12,7 +12,7 @@ class App : Application() {
         startKoin {
             Timber.i("Koin Started")
             androidContext(this@App)
-            modules(listOf(networkModule, viewModelSearchResult))
+            modules(applicationModule)
         }
     }
 
