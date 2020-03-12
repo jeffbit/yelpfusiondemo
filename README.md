@@ -1,3 +1,3 @@
 # yelpfusiondemo
-Yelp fusion demo 
+Yelp fusion demo for testing purposes
 
