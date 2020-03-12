@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val applicationModule = module(override = true) {
     //depicts a singleton component
     single {
-        Repository(RetrofitClient.businessApi, get())
+        Repository(RetrofitClient.businessApi)
     }
 
     viewModel {

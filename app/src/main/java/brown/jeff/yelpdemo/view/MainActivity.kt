@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
 
 
-        //initRxErrorHandler()
+        initRxErrorHandler()
     }
 
     override fun onOptionsMenuClosed(menu: Menu?) {

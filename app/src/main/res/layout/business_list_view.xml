@@ -34,7 +34,7 @@
                 app:layout_constraintVertical_bias="0.213"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/business_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

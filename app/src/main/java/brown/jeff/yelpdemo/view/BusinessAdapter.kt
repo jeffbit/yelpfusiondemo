@@ -36,11 +36,7 @@ class BusinessAdapter(private var businesses: List<Business>) :
         this.businesses = businesses
         notifyDataSetChanged()
     }
-//    //used with viewmodel mutablelist to update each item in list when observed
-//    fun updateBusiness(business: Business) {
-//        businesses.set(businesses.indexOf(business),business)
-//        notifyItemChanged(businesses.indexOf(business))
-//    }
+
 
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -49,8 +45,8 @@ class BusinessAdapter(private var businesses: List<Business>) :
         private val businessReview: TextView = itemView.findViewById(R.id.business_review)
 
         fun bind(business: Business) {
-            //business review should be posted here
-            businessReview.text = business.name
+            //business review should be posted here along with images
+            businessReview.text = business.reviews[0].text
 
             Glide.with(businessImage.context)
                 .load(business.imageUrl)

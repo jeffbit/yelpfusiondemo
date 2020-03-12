@@ -18,7 +18,7 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <ProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="202dp"

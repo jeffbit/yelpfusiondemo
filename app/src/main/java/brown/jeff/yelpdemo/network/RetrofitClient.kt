@@ -1,5 +1,6 @@
 package brown.jeff.yelpdemo.network
 
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,10 +13,14 @@ object RetrofitClient {
     private val URL: String = "https://api.yelp.com/v3/"
     private val authInterceptor = AuthInterceptor()
     //interceptor for viewing url
-    private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val logInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+   //interceptor for throttling
+    private val throttleLimit = ThrottleLimit()
 
     private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(authInterceptor).build()
+        .addInterceptor(authInterceptor)
+        .addNetworkInterceptor(throttleLimit)
+        .dispatcher(throttleLimit.createDispatcher()).build()
 
     private fun retrofit(): Retrofit {
         Timber.e("Retrofit Started")

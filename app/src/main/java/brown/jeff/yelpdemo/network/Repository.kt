@@ -5,7 +5,7 @@ import brown.jeff.yelpdemo.model.Reviews
 import io.reactivex.Single
 
 class Repository(
-    private val businessApi: BusinessApi, private val networkConnection: NetworkConnection
+    private val businessApi: BusinessApi
 ) {
 
     fun searchObservable(term: String, location: String, limit: Int): Single<Businesses> {
@@ -18,7 +18,7 @@ class Repository(
 
 //    // original  fun using result wrapper to handle errors in data
 //    // was trying to use fun with livedata transform to map the api calls together
-//
+//    // tried to use with observable but could not get functioning properly
 //    fun search(term: String, location: String, limit: Int): Result<Businesses> {
 //        return when (networkConnection.isInternetAvailable()) {
 //            true -> safeCall(businessApi.searchBusiness(term, location, limit))

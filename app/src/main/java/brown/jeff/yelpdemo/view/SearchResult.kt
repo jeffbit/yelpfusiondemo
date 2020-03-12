@@ -37,6 +37,7 @@ class SearchResult : Fragment() {
 
         businessRV.apply {
             layoutManager = GridLayoutManager(context, 2)
+
             setHasFixedSize(true)
             adapter = businessAdapter
 
@@ -52,7 +53,7 @@ class SearchResult : Fragment() {
 
 
     private fun observeBusinessList() {
-        viewModel.businessList.observe(viewLifecycleOwner, Observer {
+        viewModel.businessMutableList.observe(viewLifecycleOwner, Observer {
             businessAdapter.setBusinessList(it)
         })
 
@@ -78,23 +79,27 @@ class SearchResult : Fragment() {
             }
         })
     }
-//    //method to observe emitted data from rxjava observable
-//    private fun observeBusiness(){
-//        viewModel.business.observe(viewLifecycleOwner, Observer {
-//            businessAdapter.updateBusiness(it)
-//        })
-//    }
+
+    //method to observe emitted data from rxjava observable
+    private fun observeBusiness() {
+        viewModel.businessList.observe(viewLifecycleOwner, Observer {
+            businessAdapter.setBusinessList(it)
+        })
+    }
 
 
     private fun searchView(menu: Menu) {
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchView = searchItem.actionView as SearchView
         searchView.isIconified = false
+        searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-//               // returns search from flatmap observable
-//                viewModel.mergedSearch(query!!, LOCATION, 2)
-                viewModel.searchCalls(query!!, LOCATION, 20)
+                //anymore than 4 requests return http 429 error. receiving too many requests
+                //not sure how to handle besides trying to add a throttle interceptor
+                viewModel.mergedSearch(query!!, LOCATION, 4)
+//                viewModel.searchCalls(query!!, LOCATION, 20)
+                searchView.setQuery(query, false)
                 return false
             }
 
